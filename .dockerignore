@@ -1,0 +1,14 @@
+node_modules
+**/node_modules
+**/dist
+**/.next
+**/*.tsbuildinfo
+.git
+.env
+.env.*
+!.env.example
+*.log
+.nx
+.DS_Store
+README.md
+LICENSE

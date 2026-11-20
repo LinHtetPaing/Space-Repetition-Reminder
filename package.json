@@ -1,0 +1,14 @@
+{
+  "name": "space-repetition-reminder",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "build": "nx run-many -t build",
+    "build:api": "nx build api",
+    "build:web": "nx build web"
+  },
+  "devDependencies": {
+    "nx": "20.8.0",
+    "typescript": "5.7.3"
+  }
+}
