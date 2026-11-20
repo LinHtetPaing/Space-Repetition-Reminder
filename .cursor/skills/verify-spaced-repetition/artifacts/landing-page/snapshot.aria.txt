@@ -1,0 +1,6 @@
+url: http://localhost:3000/
+title: Spaced Repetition Reminder
+- document: Spaced Repetition Reminder
+  - text: MVP scaffold
+  - heading level 1: Spaced Repetition Reminder
+  - text: Create task cards and get an automatic multi-month review calendar.

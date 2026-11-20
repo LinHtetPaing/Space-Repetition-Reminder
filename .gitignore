@@ -12,3 +12,7 @@ coverage
 .nx/workspace-data
 apps/api/prisma/*.db
 apps/api/prisma/*.db-journal
+
+# Verification proof binaries (text proofs may be committed)
+.cursor/skills/verify-spaced-repetition/artifacts/**/*.png
+.cursor/skills/verify-spaced-repetition/artifacts/**/*.html
