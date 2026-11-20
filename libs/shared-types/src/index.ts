@@ -1,0 +1,64 @@
+export type Brand<T, B extends string> = T & { readonly __brand: B };
+
+export type UserId = Brand<string, "UserId">;
+export type TaskCardId = Brand<string, "TaskCardId">;
+
+/** ISO 8601 UTC timestamp string (e.g. from Date.toISOString()). */
+export type UtcInstant = Brand<string, "UtcInstant">;
+
+export type TipTapNode = {
+  type: string;
+  attrs?: Record<string, unknown>;
+  content?: TipTapNode[];
+  marks?: unknown[];
+  text?: string;
+};
+
+export type TipTapDoc = {
+  type: "doc";
+  content?: TipTapNode[];
+};
+
+/** Public user returned by auth endpoints. */
+export type PublicUser = {
+  id: UserId;
+  email: string;
+  /** ISO 8601 UTC timestamp. */
+  createdAt: string;
+};
+
+/** Public task card returned by task-card endpoints. */
+export type TaskCard = {
+  id: TaskCardId;
+  userId: UserId;
+  title: string;
+  description: TipTapDoc;
+  createdAt: UtcInstant;
+  updatedAt: UtcInstant;
+};
+
+export type ReviewStatus = "Pending" | "Completed";
+export type ReviewScheduleId = Brand<string, "ReviewScheduleId">;
+
+export type RetentionPolicy = {
+  id: string;
+  userId: UserId;
+  /** Calendar months from card creation; default 6. */
+  horizonMonths: number;
+  /** Day offsets from creation; default [1, 3, 7, 14, 30, 60, 90, 180]. */
+  intervalsDays: number[];
+};
+
+export type ReviewSchedule = {
+  id: ReviewScheduleId;
+  taskCardId: TaskCardId;
+  userId: UserId;
+  scheduledFor: UtcInstant;
+  status: ReviewStatus;
+  completedAt: UtcInstant | null;
+  intervalDays: number;
+  /** Set when the endpoint joins TaskCard (calendar / due). */
+  taskCardTitle?: string;
+};
+
+export type ReviewSchedulePublic = ReviewSchedule;

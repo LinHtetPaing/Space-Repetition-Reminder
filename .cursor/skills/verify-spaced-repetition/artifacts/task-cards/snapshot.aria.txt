@@ -1,0 +1,6 @@
+URL: http://localhost:3000/cards/cmwp467u50002s601a5l3o0s2
+heading: Spaced review basics (edited)
+Updated 11/20/2026, 10:09:05 PM
+body: Edited body: schedule the next review farther out.
+links: Edit, All cards
+list: Spaced review basics (edited) visible on /cards

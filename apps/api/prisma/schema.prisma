@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ReviewStatus {
+  Pending
+  Completed
+}
+
+model User {
+  id               String            @id @default(cuid())
+  email            String            @unique
+  passwordHash     String
+  createdAt        DateTime          @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime          @updatedAt @db.Timestamptz(3)
+  taskCards        TaskCard[]
+  retentionPolicy  RetentionPolicy?
+  reviewSchedules  ReviewSchedule[]
+}
+
+model TaskCard {
+  id              String           @id @default(cuid())
+  userId          String
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String
+  description     Json
+  createdAt       DateTime         @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime         @updatedAt @db.Timestamptz(3)
+  reviewSchedules ReviewSchedule[]
+
+  @@index([userId])
+}
+
+model RetentionPolicy {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  horizonMonths  Int      @default(6)
+  intervalsDays  Json
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @db.Timestamptz(3)
+}
+
+model ReviewSchedule {
+  id            String       @id @default(cuid())
+  taskCardId    String
+  taskCard      TaskCard     @relation(fields: [taskCardId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scheduledFor  DateTime     @db.Timestamptz(3)
+  status        ReviewStatus @default(Pending)
+  completedAt   DateTime?    @db.Timestamptz(3)
+  intervalDays  Int
+  createdAt     DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime     @updatedAt @db.Timestamptz(3)
+
+  @@index([userId, scheduledFor])
+  @@index([taskCardId])
+}
