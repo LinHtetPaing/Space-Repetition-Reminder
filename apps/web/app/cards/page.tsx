@@ -120,6 +120,8 @@ export default function CardsListPage() {
             New card
           </button>
           <Link href="/dashboard">Dashboard</Link>
+          <Link href="/calendar">Calendar</Link>
+          <Link href="/reminders">Reminders</Link>
         </div>
 
         {list.cards.length === 0 ? (

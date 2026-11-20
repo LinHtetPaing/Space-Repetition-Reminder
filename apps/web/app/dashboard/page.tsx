@@ -93,6 +93,12 @@ export default function DashboardPage() {
         <Link href="/cards" style={{ ...button, textAlign: "center" }}>
           Task Cards
         </Link>
+        <Link href="/calendar" style={{ ...button, textAlign: "center" }}>
+          Calendar
+        </Link>
+        <Link href="/reminders" style={{ ...button, textAlign: "center" }}>
+          Reminders
+        </Link>
         <button
           style={buttonSecondary}
           type="button"

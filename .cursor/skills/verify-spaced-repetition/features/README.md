@@ -34,3 +34,4 @@ Maintained source for proving user-facing behavior of the Dockerized app. Read t
 - [Landing page](./landing-page.md) — public homepage shell.
 - [Auth register and login](./auth-register-login.md) — Slice 1 auth journeys (fail until routes ship).
 - [Task Cards](./task-cards.md) — create, list, view, and edit TipTap task cards.
+- [Calendar and Reminders](./calendar-reminders.md) — month calendar and due-today complete queue.
