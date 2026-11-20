@@ -14,5 +14,7 @@ module.exports = {
   testEnvironment: "node",
   moduleNameMapper: {
     "^@srr/shared-types$": "<rootDir>/../../libs/shared-types/src/index.ts",
+    "^@srr/schedule-engine$":
+      "<rootDir>/../../libs/schedule-engine/src/index.ts",
   },
 };

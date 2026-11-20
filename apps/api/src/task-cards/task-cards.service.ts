@@ -6,13 +6,17 @@ import {
 import { Prisma } from "@prisma/client";
 import type { TaskCard } from "@srr/shared-types";
 import { PrismaService } from "../prisma/prisma.service";
+import { ReviewsService } from "../reviews/reviews.service";
 import { toPublicTaskCard } from "./helpers/public-task-card";
 import { parseTipTapDoc } from "./helpers/tip-tap";
 import { parseTitle } from "./helpers/title";
 
 @Injectable()
 export class TaskCardsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly reviews: ReviewsService,
+  ) {}
 
   async create(
     userId: string,
@@ -22,13 +26,18 @@ export class TaskCardsService {
     const title = this.requireTitle(rawTitle);
     const description = this.requireDescription(rawDescription);
 
-    const row = await this.prisma.taskCard.create({
-      data: {
-        userId,
-        title,
-        description: description as Prisma.InputJsonValue,
-      },
+    const row = await this.prisma.$transaction(async (tx) => {
+      const card = await tx.taskCard.create({
+        data: {
+          userId,
+          title,
+          description: description as Prisma.InputJsonValue,
+        },
+      });
+      await this.reviews.generateForNewCard(tx, card);
+      return card;
     });
+
     return toPublicTaskCard(row);
   }
 

@@ -36,3 +36,25 @@ export type TaskCard = {
   createdAt: UtcInstant;
   updatedAt: UtcInstant;
 };
+
+export type ReviewStatus = "Pending" | "Completed";
+export type ReviewScheduleId = Brand<string, "ReviewScheduleId">;
+
+export type RetentionPolicy = {
+  id: string;
+  userId: UserId;
+  /** Calendar months from card creation; default 6. */
+  horizonMonths: number;
+  /** Day offsets from creation; default [1, 3, 7, 14, 30, 60, 90, 180]. */
+  intervalsDays: number[];
+};
+
+export type ReviewSchedule = {
+  id: ReviewScheduleId;
+  taskCardId: TaskCardId;
+  userId: UserId;
+  scheduledFor: UtcInstant;
+  status: ReviewStatus;
+  completedAt: UtcInstant | null;
+  intervalDays: number;
+};

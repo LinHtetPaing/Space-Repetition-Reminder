@@ -7,8 +7,10 @@ RUN apk add --no-cache python3 make g++
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml nx.json tsconfig.base.json ./
 COPY apps/api ./apps/api
 COPY libs/shared-types ./libs/shared-types
+COPY libs/schedule-engine ./libs/schedule-engine
 RUN pnpm install --frozen-lockfile --filter @srr/api...
 RUN pnpm --filter @srr/shared-types build
+RUN pnpm --filter @srr/schedule-engine build
 WORKDIR /app/apps/api
 RUN pnpm exec prisma generate
 RUN rm -f tsconfig.build.tsbuildinfo tsconfig.tsbuildinfo && pnpm exec nest build && test -f dist/main.js
