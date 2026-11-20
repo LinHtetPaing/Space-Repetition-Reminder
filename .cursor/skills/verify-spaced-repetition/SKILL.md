@@ -47,7 +47,7 @@ Exit `0` only when all checks pass. Run doctor first whenever anything looks off
 
 ## Drive
 
-**API.** Prefer `curl` with cookies for auth once Slice 1 auth exists. Example health:
+**API.** Prefer `curl` with cookie jars for auth and reviews. Example health:
 
 ```bash
 curl -sf http://localhost:4000/health
@@ -59,10 +59,13 @@ Stable handles today:
 
 | Surface | Handle |
 | --- | --- |
-| Landing | Heading text `Spaced Repetition Reminder` |
+| Landing | Heading `Spaced Repetition Reminder`; links `Register`, `Log in` |
 | API health | Path `/health`, body `status` field `ok` |
+| Auth | `/register`, `/login`, `/dashboard`; button `Log out` |
+| Task Cards | `/cards`, `/cards/new`, button `Create card` |
+| Calendar / Reminders | `/calendar`, `/reminders`; Complete on due rows |
 
-Auth routes (`/register`, `/login`, `/dashboard`) are mapped for Slice 1 but are not verified until those pages ship. See `features/auth-register-login.md`.
+See the feature map for full journeys.
 
 **Isolation.** Default ports are `3000` and `4000`. Two agents must not drive the same compose project at once. Do not attach to a stack you did not launch (or the shared session stack the operator already left up for this branch). If doctor fails because ports are owned by another project, stop and report; do not kill foreign containers by name.
 

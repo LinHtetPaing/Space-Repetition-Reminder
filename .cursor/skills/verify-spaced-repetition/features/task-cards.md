@@ -13,8 +13,8 @@ Task Cards let a signed-in learner create, list, view, and edit notes. Descripti
 ## How to get to it (user POV)
 
 - Sign in, open Dashboard, choose Task Cards.
-- From `/cards`, choose New card, enter a title, format the description, submit.
-- Open a card from the list to view it. Choose Edit to change title or body, then Save.
+- From `/cards`, choose New card, enter a title, format the description, choose **Create card**.
+- Open a card from the list to view it. Choose Edit to change title or body, then **Save**.
 
 ## Driving it with Cursor IDE browser
 
@@ -26,13 +26,14 @@ Preconditions:
 
 - **Register or log in.** Reach `/dashboard`.
 - **Open Task Cards.** Choose the Task Cards control. Browser reaches `/cards`.
-- **Create.** Open New card. Fill Title. Use Bold or Bullet list in the editor. Submit. Browser lands on `/cards/[id]` and shows the title and formatted body.
+- **Create.** Open New card. Fill Title. Use Bold or Bullet list in the editor. Choose **Create card**. Browser lands on `/cards/[id]` and shows the title and formatted body.
 - **List.** Open All cards. The new title appears with an Updated timestamp.
 - **Edit.** Open Edit, change the title and body, Save. View page shows the updates.
 - **Proof.** Save screenshots and an accessibility snapshot under `artifacts/task-cards/`.
 
 ## Gotchas
 
+- Creating a card also generates `ReviewSchedule` rows (spaced intervals). That side effect is verified under [calendar-reminders.md](./calendar-reminders.md), not here.
 - Description must be TipTap JSON `{ "type": "doc", ... }`. Never persist HTML strings from the editor.
 - Read-only view uses TipTap with `editable={false}` and the same StarterKit schema. Do not inject `dangerouslySetInnerHTML` from untrusted HTML.
 - Unauthenticated `/cards` routes redirect to `/login` after `GET /auth/me` returns 401, same as the dashboard.

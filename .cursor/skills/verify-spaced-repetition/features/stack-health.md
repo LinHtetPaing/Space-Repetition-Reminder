@@ -1,6 +1,6 @@
 # Stack health
 
-Stack health proves the Dockerized API answers ready and the compose services needed for study flows are up.
+Stack health proves the Dockerized API answers ready and the published web/API surfaces are reachable.
 
 ## Sub-features
 
@@ -26,4 +26,5 @@ Preconditions:
 ## Gotchas
 
 - Container `Up` without doctor can still mean migrations are unfinished. Wait for doctor.
+- `doctor.sh` only asserts running `api` and `web` plus HTTP checks. Postgres and Redis are compose dependencies of `api` (internal network, healthgated) and are not named in the doctor script.
 - Host Redis or Postgres on published ports is irrelevant; this compose keeps DB/cache internal.

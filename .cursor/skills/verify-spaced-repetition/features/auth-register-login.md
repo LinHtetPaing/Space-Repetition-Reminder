@@ -15,7 +15,7 @@ Auth lets a learner register with email and matching passwords, log in, reach an
 - Open `/register`, submit email, password, confirm password.
 - Open `/login`, submit email and password.
 - Land on `/dashboard` when authenticated.
-- Choose logout (once the control exists).
+- Choose **Log out** on the dashboard.
 
 ## Driving it with Cursor IDE browser and curl
 
@@ -25,7 +25,7 @@ Preconditions:
 - Routes `/register`, `/login`, and `/dashboard` exist on the web app.
 - API exposes `POST /auth/register`, `POST /auth/login`, `POST /auth/logout`, `GET /auth/me` with HttpOnly JWT cookies.
 
-- **Register.** Open `/register`, fill Email, Password, Confirm Password with a unique lowercase email. Submit. Browser reaches `/dashboard` and shows the email.
+- **Register.** Open `/register`, fill Email, Password, Confirm Password with a unique lowercase email. Choose **Create account**. Browser reaches `/dashboard` and shows the email.
 - **API me.** With the cookie jar from register, run `curl -sf -b cookies.txt http://localhost:4000/auth/me`. Body includes the same email.
 - **Logout then login.** Log out, open `/login`, sign in with the same credentials. Dashboard shows the email again.
 - **Proof.** Save dashboard screenshot and `me.json` under `artifacts/auth-register-login/`.
