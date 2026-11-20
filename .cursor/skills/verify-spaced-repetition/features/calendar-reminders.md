@@ -23,6 +23,7 @@ Preconditions:
 - `helpers/doctor.sh` exits `0`.
 - Auth routes work (see [auth-register-login.md](./auth-register-login.md)).
 - At least one Task Card exists so schedule rows were generated on create.
+- For **Complete** on Reminders: a Pending review whose civil date is **today** in the browser timezone. Creating a card today is not enough (default first interval is +1 day). Arrange due-today via API/DB update of `scheduledFor`, or wait until day-1 lands on today.
 - API exposes `GET /reviews/calendar`, `GET /reviews/due`, and `POST /reviews/:id/complete` with session cookies.
 
 - **Register or log in.** Reach `/dashboard`.
@@ -36,6 +37,7 @@ Preconditions:
 
 - Pass IANA `timezone` on every calendar and due request. Default is `Intl.DateTimeFormat().resolvedOptions().timeZone`.
 - Calendar returns only days that have reviews. Empty days are valid and show "No reviews on this day."
-- Due returns Pending reviews for the civil `on` date (defaults to today in that timezone). Completing a review that is already Completed returns conflict from the API.
+- Default intervals start at **1 day**, so a brand-new card usually shows **Nothing due today** on Reminders until a Pending row falls on today's civil date.
+- Due returns Pending reviews for the civil `on` date (defaults to today in that timezone). Completing a review that is already Completed returns conflict from the API. The API Complete endpoint does not require due-today; the Reminders UI only lists due-today rows.
 - Unauthenticated `/calendar` and `/reminders` redirect to `/login` after `GET /auth/me` returns 401, same as the dashboard.
 - Web calls the API at `NEXT_PUBLIC_API_URL` with `credentials: "include"`.
