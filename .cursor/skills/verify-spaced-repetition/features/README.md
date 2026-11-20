@@ -33,3 +33,4 @@ Maintained source for proving user-facing behavior of the Dockerized app. Read t
 - [Stack health](./stack-health.md) — API `/health` and compose readiness.
 - [Landing page](./landing-page.md) — public homepage shell.
 - [Auth register and login](./auth-register-login.md) — Slice 1 auth journeys (fail until routes ship).
+- [Task Cards](./task-cards.md) — create, list, view, and edit TipTap task cards.

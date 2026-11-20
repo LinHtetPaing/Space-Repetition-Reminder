@@ -1,11 +1,13 @@
 "use client";
 
 import type { PublicUser } from "@srr/shared-types";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ApiError } from "../../lib/api";
 import { logout, me } from "../../lib/auth";
 import {
+  button,
   buttonSecondary,
   errorText,
   pageShell,
@@ -88,6 +90,9 @@ export default function DashboardPage() {
       <div style={panel}>
         <h1 style={title}>Dashboard</h1>
         <p style={subtitle}>Signed in as {state.user.email}</p>
+        <Link href="/cards" style={{ ...button, textAlign: "center" }}>
+          Task Cards
+        </Link>
         <button
           style={buttonSecondary}
           type="button"

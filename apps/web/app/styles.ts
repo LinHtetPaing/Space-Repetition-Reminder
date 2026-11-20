@@ -17,6 +17,12 @@ export const panel: CSSProperties = {
   gap: "1rem",
 };
 
+/** Wider shell for task-card list and editor pages. */
+export const widePanel: CSSProperties = {
+  ...panel,
+  maxWidth: "40rem",
+};
+
 export const title: CSSProperties = {
   fontSize: "clamp(1.75rem, 4vw, 2.25rem)",
   margin: 0,
