@@ -32,6 +32,7 @@ Preconditions:
 
 ## Gotchas
 
-- Until Slice 1 auth commits land, journeys fail here on purpose. Report the missing route or endpoint; do not mark stack-health as auth proof.
+- Web routes `/register`, `/login`, and `/dashboard` call the API at `NEXT_PUBLIC_API_URL` with `credentials: "include"`. The browser talks to the API origin directly; CORS must allow `http://localhost:3000`.
+- Unauthenticated `/dashboard` redirects to `/login` after `GET /auth/me` returns 401.
 - Emails are normalized to lowercase. Assert the normalized address.
 - Cookies are HttpOnly. Drive auth through the browser or curl cookie jars, not `localStorage`.
