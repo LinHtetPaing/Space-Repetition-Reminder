@@ -15,10 +15,11 @@ type ReviewScheduleRow = {
   status: ReviewStatus;
   completedAt: Date | null;
   intervalDays: number;
+  taskCard?: { title: string } | null;
 };
 
 export function toPublicReviewSchedule(row: ReviewScheduleRow): ReviewSchedule {
-  return {
+  const base: ReviewSchedule = {
     id: row.id as ReviewScheduleId,
     taskCardId: row.taskCardId as TaskCardId,
     userId: row.userId as UserId,
@@ -29,4 +30,8 @@ export function toPublicReviewSchedule(row: ReviewScheduleRow): ReviewSchedule {
       : null,
     intervalDays: row.intervalDays,
   };
+  if (row.taskCard?.title !== undefined) {
+    base.taskCardTitle = row.taskCard.title;
+  }
+  return base;
 }

@@ -57,4 +57,8 @@ export type ReviewSchedule = {
   status: ReviewStatus;
   completedAt: UtcInstant | null;
   intervalDays: number;
+  /** Set when the endpoint joins TaskCard (calendar / due). */
+  taskCardTitle?: string;
 };
+
+export type ReviewSchedulePublic = ReviewSchedule;
