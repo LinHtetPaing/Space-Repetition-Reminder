@@ -10,7 +10,8 @@
     "declaration": false,
     "incremental": false,
     "strictNullChecks": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "paths": {}
   },
   "include": ["src/**/*"]
 }
